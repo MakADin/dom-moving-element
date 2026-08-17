@@ -1,11 +1,67 @@
-// TODO: write code here
+import "../css/style.css";
+import goblinImage from "../img/goblin.png";
 
-// comment this to pass build
-const unusedVariable = "variable";
+class GoblinGame {
+  constructor(containerId) {
+    this.container = document.querySelector(containerId);
+    this.boardSize = 4;
+    this.cells = [];
+    this.currentCellIndex = null;
+    this.goblinElement = null;
+  }
 
-// for demonstration purpose only
-export default function demo(value) {
-  return `Demo: ${value}`;
+  init() {
+    this.createBoard();
+    this.createGoblin();
+    this.startMovementLoop();
+  }
+
+  createBoard() {
+    const totalCells = this.boardSize ** 2;
+    for (let i = 0; i < totalCells; i++) {
+      const cell = document.createElement("div");
+      cell.classList.add("cell");
+      this.container.appendChild(cell);
+      this.cells.push(cell);
+    }
+  }
+
+  createGoblin() {
+    const img = document.createElement("img");
+    img.src = goblinImage;
+    img.alt = "Goblin";
+    img.classList.add("goblin-image");
+
+    this.goblinElement = img;
+  }
+
+  getRandomIndex() {
+    let newIndex;
+    do {
+      newIndex = Math.floor(Math.random() * this.cells.length);
+    } while (newIndex === this.currentCellIndex);
+
+    return newIndex;
+  }
+
+  moveGoblin() {
+    const nextIndex = this.getRandomIndex();
+
+    this.cells[nextIndex].appendChild(this.goblinElement);
+
+    this.currentCellIndex = nextIndex;
+  }
+
+  startMovementLoop() {
+    this.moveGoblin();
+
+    setInterval(() => {
+      this.moveGoblin();
+    }, 1000);
+  }
 }
 
-console.log("app.js included");
+document.addEventListener("DOMContentLoaded", () => {
+  const game = new GoblinGame(".game-container");
+  game.init();
+});

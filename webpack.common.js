@@ -17,14 +17,14 @@ module.exports = {
           loader: "babel-loader",
         },
       },
-      {
-        test: /\.html$/,
-        use: [
-          {
-            loader: "html-loader",
-          },
-        ],
-      },
+      // {
+      //   test: /\.html$/,
+      //   use: [
+      //     {
+      //       loader: "html-loader",
+      //     },
+      //   ],
+      // },
       {
         test: /\.css$/,
         use: [MiniCssExtractPlugin.loader, "css-loader"],
@@ -45,4 +45,7 @@ module.exports = {
       chunkFilename: "[id].css",
     }),
   ],
+  stats: {
+    children: true,
+  },
 };
