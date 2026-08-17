@@ -3,7 +3,10 @@ import goblinImage from "../img/goblin.png";
 
 class GoblinGame {
   constructor(containerId) {
-    this.container = document.querySelector(containerId);
+    this.container = this.container =
+      typeof document !== "undefined"
+        ? document.querySelector(containerId)
+        : null;
     this.boardSize = 4;
     this.cells = [];
     this.currentCellIndex = null;
@@ -61,7 +64,14 @@ class GoblinGame {
   }
 }
 
-document.addEventListener("DOMContentLoaded", () => {
-  const game = new GoblinGame(".game-container");
-  game.init();
-});
+// document.addEventListener("DOMContentLoaded", () => {
+//   const game = new GoblinGame(".game-container");
+//   game.init();
+// });
+if (typeof document !== "undefined") {
+  document.addEventListener("DOMContentLoaded", () => {
+    const game = new GoblinGame("game-container");
+    game.init();
+  });
+}
+export { GoblinGame };
