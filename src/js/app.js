@@ -24,7 +24,7 @@ class GoblinGame {
     for (let i = 0; i < totalCells; i++) {
       const cell = document.createElement("div");
       cell.classList.add("cell");
-      this.container.appendChild(cell);
+      this.container.append(cell);
       this.cells.push(cell);
     }
   }
@@ -50,7 +50,7 @@ class GoblinGame {
   moveGoblin() {
     const nextIndex = this.getRandomIndex();
 
-    this.cells[nextIndex].appendChild(this.goblinElement);
+    this.cells[nextIndex].append(this.goblinElement);
 
     this.currentCellIndex = nextIndex;
   }
@@ -70,7 +70,7 @@ class GoblinGame {
 // });
 if (typeof document !== "undefined") {
   document.addEventListener("DOMContentLoaded", () => {
-    const game = new GoblinGame("game-container");
+    const game = new GoblinGame(".game-container");
     game.init();
   });
 }
